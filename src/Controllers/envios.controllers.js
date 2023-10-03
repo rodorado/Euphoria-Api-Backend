@@ -28,11 +28,12 @@ export const getEnvio = async (req, res) => {
 /* Función para añadir un envío: POST */
 export const postEnvios = async (req, res) => {
   try {
-    const { idEnvio, monto_total, idCliente, idProducto } = req.body;
-    const [rows] = await pool.query('INSERT INTO Envios (idEnvio, monto_total, idCliente, idProducto) VALUES (?, ?, ?, ?)', [idEnvio, monto_total, idCliente, idProducto]);
+    const { idEnvio, monto_total, estado, idCliente, idProducto } = req.body;
+    const [rows] = await pool.query('INSERT INTO Envios (idEnvio, monto_total, estado, idCliente, idProducto) VALUES (?, ?, ?, ?, ?)', [idEnvio, monto_total, estado, idCliente, idProducto]);
     res.send({
       idEnvio,
       monto_total,
+      estado,
       idCliente,
       idProducto,
     });
@@ -46,8 +47,8 @@ export const postEnvios = async (req, res) => {
 export const putEnvios = async (req, res) => {
   try {
     const { id } = req.params;
-    const { idEnvio, monto_total, idCliente, idProducto } = req.body;
-    const [result] = await pool.query('UPDATE Envios SET idEnvio = ?, monto_total = ?, idCliente = ?, idProducto = ? WHERE idEnvio = ?', [idEnvio, monto_total, idCliente, idProducto, id]);
+    const { idEnvio, monto_total, estado, idCliente, idProducto } = req.body;
+    const [result] = await pool.query('UPDATE Envios SET idEnvio = ?, monto_total = ?, estado = ?, idCliente = ?, idProducto = ? WHERE idEnvio = ?', [idEnvio, monto_total, estado, idCliente, idProducto, id]);
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Envío no encontrado' });
     }

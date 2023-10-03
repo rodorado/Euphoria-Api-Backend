@@ -28,15 +28,14 @@ export const getProducto = async (req, res) => {
 /* Función para añadir un producto: POST */
 export const postProductos = async (req, res) => {
   try {
-    const { nombre, detalle, monto, impuestos, estado } = req.body;
-    const [rows] = await pool.query('INSERT INTO Productos (nombre, detalle, monto, impuestos, estado) VALUES (?, ?, ?, ?, ?)', [nombre, detalle, monto, impuestos, estado]);
+    const { nombre, detalle, monto, impuestos } = req.body;
+    const [rows] = await pool.query('INSERT INTO Productos (nombre, detalle, monto, impuestos) VALUES (?, ?, ?, ?)', [nombre, detalle, monto, impuestos]);
     res.send({
       id: rows.insertId,
       nombre,
       detalle,
       monto,
       impuestos,
-      estado,
     });
   } catch (error) {
     console.error("Error al añadir un producto:", error);
@@ -48,8 +47,8 @@ export const postProductos = async (req, res) => {
 export const putProductos = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, detalle, monto, impuestos, estado } = req.body;
-    const [result] = await pool.query('UPDATE Productos SET nombre = ?, detalle = ?, monto = ?, impuestos = ?, estado = ? WHERE idProducto = ?', [nombre, detalle, monto, impuestos, estado, id]);
+    const { nombre, detalle, monto, impuestos } = req.body;
+    const [result] = await pool.query('UPDATE Productos SET nombre = ?, detalle = ?, monto = ?, impuestos = ? WHERE idProducto = ?', [nombre, detalle, monto, impuestos, id]);
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Producto no encontrado' });
     }
