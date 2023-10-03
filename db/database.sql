@@ -30,7 +30,6 @@ nombre VARCHAR(500) NOT NULL,
 detalle VARCHAR(500), 
 monto DECIMAL(10,2) NOT NULL,
 impuestos DECIMAL (10,3) NOT NULL,
-estado VARCHAR(255) NOT NULL,
 PRIMARY KEY (idProducto)
 );
 
@@ -39,6 +38,7 @@ PRIMARY KEY (idProducto)
 CREATE TABLE Envios(
 idEnvio INT NOT NULL UNIQUE,
 monto_total DECIMAL(10,2),
+estado VARCHAR(255) NOT NULL,
 idCliente INT NOT NULL,
 idProducto INT NOT NULL,
 PRIMARY KEY (idEnvio),
@@ -56,11 +56,11 @@ INSERT INTO Clientes(nombre_apellido, telefono, domicilio, codigo_postal, provin
 INSERT INTO Clientes(nombre_apellido, telefono, domicilio, codigo_postal, provincia, dni, usuario_ig) VALUES ('Fabiana Décima', '3815668680', 'Psj Muñecas 54', 4113, 'Tucumán', 48964482, 'fabiok236');
 
 -- INSERT PRODUCTOS
-INSERT INTO Productos(nombre, detalle, monto, impuestos, estado) VALUES ('LAYOVER BY V', 'Versión Random con POB', 19000, 4000, 'PENDIENTE');
-INSERT INTO Productos(nombre, detalle, monto, impuestos, estado) VALUES ('GET UP New Jeans', 'Bunny Beach Bag Ver Random', 20235, 4250, 'PENDIENTE');
+INSERT INTO Productos(nombre, detalle, monto, impuestos) VALUES ('LAYOVER BY V', 'Versión Random con POB', 19000, 4000);
+INSERT INTO Productos(nombre, detalle, monto, impuestos) VALUES ('GET UP New Jeans', 'Bunny Beach Bag Ver Random', 20235, 4250);
 
 -- INSER ENVIOS
-INSERT INTO Envios(idEnvio, monto_total, idCliente, idProducto) VALUES (5579, 23000, 1, 1);
-INSERT INTO Envios(idEnvio, monto_total, idCliente, idProducto) VALUES (5580, 23000, 2, 1);
+INSERT INTO Envios(idEnvio, monto_total, estado, idCliente, idProducto) VALUES (5579, 23000, 'PENDIENTE', 1, 1);
+INSERT INTO Envios(idEnvio, monto_total, estado, idCliente, idProducto) VALUES (5580, 23000, 'PENDIENTE', 2, 1);
 
 
